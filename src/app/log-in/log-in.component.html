@@ -1,0 +1,46 @@
+
+<div class= "container" id="logIn-container">
+    <div>
+        <form [formGroup]="user" (ngSubmit)="onLogInUser(user)">
+            <label for="Email"></label>
+            <input type="text" formControlName="email" placeholder="Email" required>
+  
+            <label for="Password"></label>
+            <input type="text" formControlName="password" placeholder="Password" required>
+            <div>
+              <button type="submit">
+                log in
+              </button>
+              <button type="button" class="nav-link" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary" (click)="modal.open(addUserModal)">
+                Register
+              </button>
+            </div>
+          </form>
+    </div>
+</div>
+
+<a style="visibility: hidden" class="logInButton" id="logInButton" [routerLink]="['/','note','home']" routerLinkActive="activebutton">log in</a>
+
+<ng-template #addUserModal let-modal>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserModal">Register</h5>
+        </div>
+        <div class="modal-body">
+          <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" ngModel name="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="text" ngModel name="password" id="password" placeholder="Password" required>
+            </div>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" id="add-user-form" class="btn btn-secondary" data-dismiss="modal" (click)= "modal.close()">Close</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</ng-template>

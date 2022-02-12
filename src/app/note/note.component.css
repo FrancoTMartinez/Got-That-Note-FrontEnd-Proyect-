@@ -1,0 +1,99 @@
+.container {
+    display: grid;
+    background-color: #202020;
+    min-height: 100vh;
+    grid-template-rows: 0fr 2.6fr;
+    gap: 10px 5px;
+    grid-template-areas: 
+    "navBar"
+    "note-grid"; 
+    grid-area: container;
+  }
+  .navBar {
+    display: grid;
+    background-color: #3AA944;
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 0.5fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      ". . . ."; 
+    grid-area: navBar; 
+  }
+  
+  .note-grid {
+    display: grid;
+    grid-auto-columns: 1fr; 
+    grid-auto-rows: 1fr; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 10px 5px; 
+    grid-template-areas: 
+      "note note note note"; 
+    justify-items: center; 
+    grid-area: note-grid; 
+  }
+  .note{
+    border:solid 2px #3ea93a;
+    border-radius: 5px;
+    display: grid;
+    grid-auto-columns: 1fr; 
+    grid-auto-rows: 1fr; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 10px 5px; 
+    grid-template-areas: 
+    "content"
+    "content"
+    "content"; 
+    justify-items: center;
+    grid-area: note; 
+  }
+  .content{
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: auto auto auto; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "note-title"
+      "note-text"
+      "buttons"; 
+    grid-area: content; 
+  }
+  .note-title{
+    display: inline;
+    color: #FAFEFA;
+  }
+  #note-text{
+    min-width: 200px;
+    max-width: 288px;
+    min-height: 55px;
+    max-height: 319px;
+    color: #FAFEFA;
+    background-color: #202020;
+  }
+  .favorite{
+    margin: 0 0 auto;
+    color:#F0FF01;
+  }
+
+  #delete-button:hover, #update-button:hover{
+    background-color: #464242;
+  }
+  #delete-button, #update-button{
+    background-color: #272727;
+    color: #FAFEFA;
+  }
+
+  .modal-dialog{
+    background-color: #202020;
+  }
+  .modal-title{
+    color: #FAFEFA;
+  }
+  #modal-label,#title,#text{
+    background-color: #202020;
+    color: #FAFEFA;
+  }
+  #text{
+    resize: none;
+  }

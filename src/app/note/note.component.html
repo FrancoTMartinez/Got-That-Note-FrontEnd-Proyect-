@@ -1,0 +1,116 @@
+
+<div class="container" id="main-container">
+
+  <nav class="navBar">
+    <a class="navbar-Got-That-Note">Got That Note</a>
+    <div>
+      <form class="form-inline my-2 my-lg-0">
+        <input type="text" #key="ngModel" ngModel (ngModelChange)="searchNotes(key.value)" name="key"
+          placeholder="Search Notes...">
+      </form>
+    </div>
+    <div class="button-navBar">
+      <button type="button" data-toggle="modal" (click)="modal.open(addNoteModal)"> New Note </button>
+      <label for="favorite">Show only Favorites</label>
+      <input type="checkbox" ngModel #favorite name="favorite" class="form-control" id="favorite"
+        (click)="onOnlyFavorites()">
+    </div>
+  </nav>
+
+  <div class="note-grid">
+    <div *ngFor="let note of notes">
+      <div class="note">
+        <div class="content">
+          <div class="note-objectId" style="display: none;">
+            {{note?.id}}
+          </div>
+          <div class="note-title">
+            <h1>{{note?.title}}</h1>
+          </div>
+          <div class="note-text">
+            <textarea autosize name="note-text" id="note-text" cols="30" rows="10">{{note?.text}}</textarea>
+          </div>
+          <div class="buttons">
+            <div class="favorite">
+              <p>{{note?.favorite}}</p>
+            </div>
+            <div class="note-date">
+              <p>{{note?.date}}</p>
+            </div>
+            <div class="delete-button">
+              <button type="button" id="delete-button" (click)="deleteNote(note)"> Delete Note </button>
+            </div>
+            <div class="update-button">
+              <button type="button" id="update-button" (click)="openModal(updateNoteModal,note)"> Update Note </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Note Modal -->
+<ng-template #addNoteModal let-modal>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNoteModal">New Note</h5>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddNote(addForm)">
+          <div class="form-group">
+            <label for="title" id="modal-label">Title</label>
+            <input type="text" ngModel name="title" class="form-control" id="title" placeholder="Title">
+          </div>
+          <div class="form-group">
+            <label for="text" id="modal-label" >Text</label>
+            <textarea autosize ngModel name="text" id="text" cols="30" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="favorite" id="modal-label">Favorite</label>
+            <input type="checkbox" ngModel name="favorite" class="form-control" id="favorite">
+            <input type="hidden" ngModel="{{userID}}" name="userId" class="form-control" id="userId">
+          </div>
+          <button type="submit" class="btn btn-primary">Save Note</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-close-addNote"
+            (click)="modal.close()">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Update Note Modal -->
+<ng-template #updateNoteModal let-modal>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateNoteModal">Update Note</h5>
+      </div>
+      <div class="modal-body">
+        <form #updateNoteForm="ngForm" (ngSubmit)="onUpdateNote(updateNoteForm)">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" ngModel="{{updatenote?.title}}" name="title" class="form-control" id="title"
+              placeholder="Title">
+          </div>
+          <div class="form-group">
+            <label for="text">Text</label>
+            <textarea autosize ngModel="{{updatenote?.text}}" name="text" id="note-text" cols="30" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="favorite">Favorite</label>
+            <input type="checkbox" ngModel="{{updatenote?.favorite}}" name="favorite" class="form-control"
+              id="favorite">
+            <input type="hidden" ngModel="{{updatenote?.userId}}" name="userId" class="form-control" id="userId">
+            <input type="hidden" ngModel="{{updatenote?.id}}" name="id" class="form-control" id="id">
+          </div>
+          <button type="submit" class="btn btn-primary">Update Note</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-close-updateNote"
+            (click)="modal.close()">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
